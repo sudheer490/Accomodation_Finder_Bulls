@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    scroll-behavior: smooth;
+    font-family: 'Nunito', sans-serif;
+}
+
+html {
+    overflow-x: hidden;
+}
+
+section {
+    min-height: 30vh;
+    padding: 10rem 9% 2rem;
+    margin-bottom: 2px;
+    max-height: 30vh;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 2rem 9%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+
+.about {
+    font-size: 62.5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    font-size: 2px;
+}
+
+.about1 {
+    font-size: 62.5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    font-size: 2px;
+}
+
+.about-img img {
+    width: 15vw;
+    height: 15vw;
+}
+
+.heading {
+    text-align: center;
+    font-size: 4.5rem;
+}
+
+.about-content h2 {
+    text-align: left;
+    line-height: 1.2;
+    font-size: 2rem;
+}
+
+.about-content p {
+    font-size: 1rem;
+    margin: 2rem 0 3rem;
+}
+
+.about-content1 h2 {
+    text-align: right;
+    line-height: 1.2;
+    font-size: 2rem;
+}
+
+.about-content1 p {
+    font-size: 1rem;
+    margin: 2rem 0 3rem;
+}
+.model{
+    margin-top: 3rem;
+    align-items: center;
+    max-height:20px;
+    min-height:20px;
+
+}

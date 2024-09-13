@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Apartments Listing</title>
+        <script src="https://unpkg.com/chart.js@2.8.0/dist/Chart.bundle.js"></script>
+        <script src="https://unpkg.com/chartjs-gauge@0.3.0/dist/chartjs-gauge.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="styles.css">
+        <style>
+    <style>
+        .card {
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+        <a class="navbar-brand" href="index.html">VETHUKKO</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+        <li class="nav-item">
+        <a class="nav-link active" href="index.html">Home</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="crud.html">Add Listing</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="Compare.html">Compare</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="Map.html">Map</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="about.html">About Us</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="login.html" id="loginLink">Login</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="#" onclick="logout()" id="logoutButton">Logout</a>
+        </li>
+        </ul>
+        </div>
+        </div>
+        </nav>
+        
+        <script>
+        window.onload = function () {
+        var username = localStorage.getItem('username');
+        var logoutButton = document.getElementById('logoutButton');
+        if (username) {
+        var loginLink = document.getElementById('loginLink');
+        loginLink.textContent = username;
+        loginLink.href = "#";
+        logoutButton.style.display = 'block';
+        } else {
+        logoutButton.style.display = 'none';
+        }
+        };
+        
+        function logout() {
+        localStorage.removeItem('username');
+        window.location.href = 'index.html';
+        }
+        </script>
+        
+
+    <div class="container </div>py-4">
+        <h1 style="text-align: center;">Apartment Listings</h1>
+        <div class="row">
+            <!-- Apartment cards will be inserted here dynamically -->
+        </div>
+    </div>
+
+    <!-- Modal for viewing more details -->
+    <div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detailsModalLabel">Apartment Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Details will be filled in by JavaScript -->
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const listings =
+            [
+                {
+                    title: "Oak Ramble",
+                    description: "Quiet community with lush landscaping.",
+                    price: "$800",
+                    image: "img/CambridgeWoods/cambridge-woods-hall.jpg",
+                    location: "100 Oak Ramble Drive, City",
+                    bedrooms: 2,
+                    bathrooms: 2,
+                    amenities: ["Pool", "24hr Gym", "Dog Park"],
+                    utilitiesIncluded: ["Water", "Trash Removal"],
+                    transport: "3 min drive to nearest metro station",
+                    leaseTerms: "12 months",
+                    securityDeposit: "$500",
+                    floorArea: "950 sqft",
+                    availableDate: "2023-07-01",
+                    contact: "555-0100",
+                    link: "https://oakrambletampa.com/"
+                },
+                {
+                    title: "Viridian Apartments",
+                    description: "Charming apartments with a community feel.",
+                    price: "$700",
+                    image: "img/OakRamble/bedroom.jpg",
+                    location: "2300 Village Drive, Suburb",
+                    bedrooms: 1,
+                    bathrooms: 1,
+                    amenities: ["Community Garden", "Pool"],
+                    utilitiesIncluded: ["Water"],
+                    transport: "Shuttle service to city center",
+                    leaseTerms: "12 months",
+                    securityDeposit: "$300",
+                    floorArea: "700 sqft",
+                    availableDate: "2023-08-15",
+                    contact: "555-0300",
+                    link: "https://livebh.com/apartments/viridian-apartments/"
+                },
+                {
+                    title: "Bay Club at Rocky Point",
+                    description: "Waterfront living with exceptional amenities.",
+                    price: "$1500",
+                    image: "img/CambridgeWoods/cambridge-woods-kitchen.jpg",
+                    location: "670 Rocky Point Ave, Waterfront",
+                    bedrooms: 2,
+                    bathrooms: 2,
+                    amenities: ["Marina Access", "Fitness Center", "Spa"],
+                    utilitiesIncluded: ["Electricity", "Water", "Internet"],
+                    transport: "10 min to downtown by water taxi",
+                    leaseTerms: "24 months",
+                    securityDeposit: "$1000",
+                    floorArea: "1200 sqft",
+                    availableDate: "2023-10-01",
+                    contact: "555-0400"
+                },
+                {
+                    title: "Bay Oaks Apartments",
+                    description: "Affordable luxury with spacious floor plans.",
+                    price: "$900",
+                    image: "img/CambridgeWoods/cambridge-woods-room.jpg",
+                    location: "3200 Oak Blvd, Near Park",
+                    bedrooms: 2,
+                    bathrooms: 1,
+                    amenities: ["24hr Security", "Fitness Room", "Community Events"],
+                    utilitiesIncluded: ["Water", "Trash"],
+                    transport: "Bus stop right outside",
+                    leaseTerms: "12 months",
+                    securityDeposit: "$450",
+                    floorArea: "850 sqft",
+                    availableDate: "2023-09-01",
+                    contact: "555-0500"
+                },
+                {
+                    title: "Bristol Place",
+                    description: "Stylish apartments in a vibrant neighborhood.",
+                    price: "$1100",
+                    image: "img/CambridgeWoods/cambridge-woods-hall.jpg",
+                    location: "2580 Bristol Circle, Downtown",
+                    bedrooms: 2,
+                    bathrooms: 2,
+                    amenities: ["Pet-Friendly", "Yoga Studio", "Concierge"],
+                    utilitiesIncluded: ["Gas", "Water"],
+                    transport: "5 min walk to subway station",
+                    leaseTerms: "12 months",
+                    securityDeposit: "$700",
+                    floorArea: "1000 sqft",
+                    availableDate: "Available Now",
+                    contact: "555-0600"
+                },
+                {
+                    title: "Brittany Oaks",
+                    description: "Peaceful living with easy access to shopping and parks.",
+                    price: "$750",
+                    image: "img/msc.jpg",
+                    location: "400 Brittany Oaks Blvd, Quiet Suburb",
+                    bedrooms: 1,
+                    bathrooms: 1,
+                    amenities: ["Park Access", "Community BBQ"],
+                    utilitiesIncluded: ["Water"],
+                    transport: "Public bus route nearby",
+                    leaseTerms: "12 months",
+                    securityDeposit: "$400",
+                    floorArea: "650 sqft",
+                    availableDate: "2023-11-01",
+                    contact: "555-0700"
+                },
+                {
+                    title: "Cambridge Woods",
+                    description: "Spacious apartments with scenic views of the lake.",
+                    price: "$50",
+                    image: "img/CambridgeWoods/cambridge-woods-entrance.jpg",
+                    location: "1234 Campus Drive, College Town",
+                    bedrooms: 2,
+                    bathrooms: 1,
+                    amenities: ["Wi-Fi", "Pool Access"],
+                    utilitiesIncluded: ["Water", "Internet"],
+                    transport: "5 min walk to bus station",
+                    leaseTerms: "12 months",
+                    securityDeposit: "$200",
+                    floorArea: "800 sqft",
+                    availableDate: "2023-09-01",
+                    contact: "555-0800"
+                },
+                {
+                    title: "Camden Live Oak",
+                    description: "Urban living with state-of-the-art facilities.",
+                    price: "$1300",
+                    image: "img/CambridgeWoods/cambridge-woods-grill-station.jpg",
+                    location: "800 Live Oak St, Metropolitan Area",
+                    bedrooms: 3,
+                    bathrooms: 2,
+                    amenities: ["Smart Home Technology", "Pool", "Gym"],
+                    utilitiesIncluded: ["Internet"],
+                    transport: "Metro station within walking distance",
+                    leaseTerms: "12 months",
+                    securityDeposit: "$1000",
+                    floorArea: "1050 sqft",
+                    availableDate: "2023-12-01",
+                    contact: "555-0900"
+                },
+                {
+                    title: "LakeView Oaks",
+                    description: "Exclusive lakeside apartments with breathtaking views.",
+                    price: "$1400",
+                    image: "img/CambridgeWoods/cambridge-woods-gym.jpg",
+                    location: "500 Lakeview Oaks Circle, Lakeside",
+                    bedrooms: 2,
+                    bathrooms: 2,
+                    amenities: ["Private Dock", "Lake Access", "Luxury Spa"],
+                    utilitiesIncluded: ["All Utilities"],
+                    transport: "Private shuttle to city center",
+                    leaseTerms: "24 months",
+                    securityDeposit: "$1500",
+                    floorArea: "1150 sqft",
+                    availableDate: "2024-01-01",
+                    contact: "555-1000"
+                }, {
+                    title: "Village Oaks",
+                    description: "Family-friendly apartments i      n a bustling community.",
+                    price: "$850",
+                    image: "img/CambridgeWoods/cambridge-woods-hall.jpg",
+                    location: "2500 Village Oaks Lane, Suburban Area",
+                    bedrooms: 2,
+                    bathrooms: 1,
+                    amenities: ["Playground", "Community Center"],
+                    utilitiesIncluded: ["Water", "Trash Removal"],
+                    transport: "School bus stops within the complex",
+                    leaseTerms: "12 months",
+                    securityDeposit: "$500",
+                    floorArea: "900 sqft",
+                    availableDate: "2023-08-01",
+                    contact: "555-1100"
+                }];
+
+        window.onload = function () {
+            const container = document.querySelector('.row');
+            listings.forEach(listing => {
+                const card = document.createElement('div');
+                card.className = 'col-md-4 mb-4';
+                card.innerHTML = `
+                        <div class="card">
+                            <img src="${listing.image}" class="card-img-top" alt="${listing.title}">
+                            <div class="card-body">
+                                <h5 class="card-title">${listing.title}</h5>
+                                <p class="card-text">${listing.description}</p>
+                                <p class="card-text"><strong>Price:</strong> ${listing.price}</p>
+                                <button onclick="showDetails(${listings.indexOf(listing)})" class="btn btn-primary">View More</button>
+                                <a href="${listing.link}" target="_blank" class="btn btn-primary">Rent Now</a>
+
+                            </div>
+                        </div>
+                    `;
+                container.appendChild(card);
+            });
+        };
+
+
+
+        function showDetails(index) {
+            const listing = listings[index];
+            const modalBody = document.querySelector('.modal-body');
+            modalBody.innerHTML = `
+<p><strong>Location:</strong> ${listing.location}</p>
+<p><strong>Bedrooms:</strong> ${listing.bedrooms}</p>
+<p><strong>Bathrooms:</strong> ${listing.bathrooms}</p>
+<p><strong>Amenities:</strong> ${listing.amenities.join(', ')}</p>
+<p><strong>Utilities Included:</strong> ${listing.utilitiesIncluded.join(', ')}</p>
+<p><strong>Transport:</strong> ${listing.transport}</p>
+<p><strong>Lease Terms:</strong> ${listing.leaseTerms}</p>
+<p><strong>Security Deposit:</strong> ${listing.securityDeposit}</p>
+<p><strong>Floor Area:</strong> ${listing.floorArea}</p>
+<p><strong>Available Date:</strong> ${listing.availableDate}</p>
+<p><strong>Contact:</strong> ${listing.contact}</p>
+        `;
+            new bootstrap.Modal(document.getElementById('detailsModal')).show();
+        }
+
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            // Define the desired width and height
+            var fixedWidth = 355; // Set your desired fixed width
+            var fixedHeight = 200; // Set your desired fixed height
+
+            // Resize all images
+            $('img').each(function () {
+                $(this).css({
+                    width: fixedWidth,
+                    height: fixedHeight,
+                    objectFit: 'cover' // Ensure images cover the specified dimensions
+                });
+            });
+        });
+    </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>

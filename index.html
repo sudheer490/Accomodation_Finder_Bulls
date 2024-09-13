@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accommodation Finder for Students</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Global Font Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Navbar Styling */
+        .navbar-brand {
+            color: #28a745;
+            font-size: 36px;
+            font-weight: bold;
+        }
+
+        .navbar-brand:hover {
+            color: #218838;
+        }
+
+        .navbar-nav .nav-link {
+            font-size: 18px;
+            margin-right: 20px;
+            color: #333;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #28a745;
+        }
+
+        .navbar-nav .nav-link.active {
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        /* Button Styling */
+        .btn-primary {
+            background-color: #28a745;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #218838;
+        }
+        /* Hero Section */
+        header {
+            background-color: #f8f9fa;
+            padding: 60px 0;
+        }
+
+        header h1 {
+            font-size: 52px;
+            color: #28a745;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        header p {
+            font-size: 20px;
+            color: #555;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        /* Form Styling */
+        .form-field {
+            width: 100%;
+            border-radius: 8px;
+            padding: 12px;
+        }
+
+        /* Carousel Styling */
+        .carousel-inner .card {
+            border: none;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .carousel-item img {
+            object-fit: cover;
+            border-radius: 5px;
+            height: 200px;
+        }
+
+        /* Feature Section */
+        .icon-feature {
+            max-width: 150px;
+            margin: 0 auto;
+        }
+
+        .icon-circle {
+            display: inline-block;
+            padding: 20px;
+            background-color: #f1f1f1;
+            border-radius: 50%;
+        }
+
+        .feature-section {
+            background-color: #f7f7f7;
+            padding: 40px 0;
+        }
+
+        .feature-section h2 {
+            font-size: 36px;
+            color: #2C3E50;
+        }
+
+        .feature-section p {
+            font-size: 18px;
+            color: #555;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-top: 1px solid #ddd;
+        }
+
+        footer p {
+            color: #777;
+        }
+
+        footer a {
+            color: #28a745;
+        }
+
+        footer a:hover {
+            color: #218838;
+        }
+
+        
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+        <a class="navbar-brand" href="index.html">VETHUKKO</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+        <li class="nav-item">
+        <a class="nav-link active" href="index.html">Home</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="crud.html">Add Listing</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="Compare.html">Compare</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="Map.html">Map</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="about.html">About Us</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="login.html" id="loginLink">Login</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="#" onclick="logout()" id="logoutButton">Logout</a>
+        </li>
+        </ul>
+        </div>
+        </div>
+        </nav>
+        
+        <script>
+        window.onload = function () {
+        var username = localStorage.getItem('username');
+        var logoutButton = document.getElementById('logoutButton');
+        if (username) {
+        var loginLink = document.getElementById('loginLink');
+        loginLink.textContent = username;
+        loginLink.href = "#";
+        logoutButton.style.display = 'block';
+        } else {
+        logoutButton.style.display = 'none';
+        }
+        };
+        
+        function logout() {
+        localStorage.removeItem('username');
+        window.location.href = 'index.html';
+        }
+        </script>
+        
+
+    <!-- Hero Section -->
+    <header class="bg-white py-5">
+        <div class="container">
+            <h1>Bulls!! Off Campus Housing</h1>
+            <p>Find the perfect apartment that suits your needs.</p>
+
+            <div class="row justify-content-center mt-4">
+                <div class="col-md-3">
+                    <select class="form-select form-field">
+                        <option selected>Apartment</option>
+                        <option value="Apartment1">Viridian</option>
+                        <option value="Apartment2">CambridgeWoods</option>
+                        <option value="Apartment3">Lakeview</option>
+                        <option value="Apartment4">Oak Ramble</option>
+                        <option value="Apartment5">Linx Apartments</option>
+                        <option value="Apartment6">Halo</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <select class="form-select form-field">
+                        <option selected>Bull Runner Availability</option>
+                        <option value="1">Yes</option>
+                        <option value="3">No</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <input type="number" class="form-control form-field" placeholder="Beds">
+                </div>
+                <div class="col-md-2">
+                    <input type="number" class="form-control form-field" placeholder="Baths">
+                </div>
+            </div>
+            <div class="row justify-content-center mt-3">
+                <div class="col-md-auto">
+                    <button type="button" onclick="window.location.href='searchview.html'" class="btn btn-primary">Search</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Carousel Section -->
+    <section class="container my-5">
+        <h2 class="text-center mb-4">Top Apartment Deals Around USF Campus</h2>
+        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="row row-cols-1 row-cols-md-3 g-4">
+                        <div class="col">
+                            <div class="card">
+                                <img src="img/CambridgeWoods/cambridge-woods-entrance.jpg" class="card-img-top" alt="Apartment Image">
+                                <div class="card-body">
+                                    <h5 class="card-title">Cambridge Woods</h5>
+                                    <p class="card-text">
+                                        Cambridge Woods Apartments in Tampa offers a range of one to three-bedroom homes with modern features including pools, a gym, and a dog park.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card">
+                                <img src="img/CambridgeWoods/cambridge-woods-gym.jpg" class="card-img-top" alt="Apartment Image">
+                                <div class="card-body">
+                                    <h5 class="card-title">Viridian Apartments</h5>
+                                    <p class="card-text">Viridian Apartments offers comfortable one-, two-, and three-bedroom units near USF with resort-style pools and a fitness center.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card">
+                                <img src="img/LakeView/Leasing-office.jpg" class="card-img-top" alt="Apartment Image">
+                                <div class="card-body">
+                                    <h5 class="card-title">Lakeview Oaks Apartments</h5>
+                                    <p class="card-text">Luxury living with renovated clubhouse, pristine outdoor spaces, and elegant apartment homes.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Carousel Items Here... -->
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- Feature Section -->
+    <section class="feature-section my-6">
+        <div class="container text-center">
+            <h2 class="fw-bold mb-4">Our Apartment Rental Deals</h2>
+            <p>Find the best deals on apartments with real-time rent tracking.</p>
+            <div class="row g-4 mt-3">
+                <!-- Price Drop Feature -->
+                <div class="col-md-4">
+                    <div class="icon-feature text-center">
+                        <span class="icon-circle bg-light text-warning rounded-circle mb-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-currency-dollar" viewBox="0 0 16 16">
+                              <path d="M8 1.5a2.5 2.5 0 0 0-2.5 2.5v1a.5.5 0 0 1-1 0v-1A3.5 3.5 0 0 1 8 0a3.5 3.5 0 0 1 3.5 3.5v1a.5.5 0 0 1 1 0v-1A2.5 2.5 0 0 0 8 1.5z"/>
+                            </svg>
+                        </span>
+                        <h3 class="fs-5 fw-bold">Price Drop</h3>
+                        <p>Stay updated on rental rate decreases.</p>
+                    </div>
+                </div>
+
+                <!-- Best Value Feature -->
+                <div class="col-md-4">
+                    <div class="icon-feature text-center">
+                        <span class="icon-circle bg-light text-primary rounded-circle mb-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-gem" viewBox="0 0 16 16">
+                              <path d="M3.1.605a.5.5 0 0 1 .4-.105l4.9 1.686a.5.5 0 0 0 .4 0l4.9-1.686a.5.5 0 0 1 .4.105l2.9 2.9a.5.5 0 0 1 .15.4v5.89a.5.5 0 0 1-.15.4l-2.9 2.9a.5.5 0 0 1-.4.15H3.5a.5.5 0 0 1-.4-.15l-2.9-2.9a.5.5 0 0 1-.15-.4V4.005a.5.5 0 0 1 .15-.4l2.9-2.9z"/>
+                            </svg>
+                        </span>
+                        <h3 class="fs-5 fw-bold">Best Value</h3>
+                        <p>Find high-quality units priced significantly lower.</p>
+                    </div>
+                </div>
+
+                <!-- Rent Specials Feature -->
+                <div class="col-md-4">
+                    <div class="icon-feature text-center">
+                        <span class="icon-circle bg-light text-success rounded-circle mb-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-tag" viewBox="0 0 16 16">
+                              <path d="M3 2v4.586l4.793 4.793a1 1 0 0 0 1.414 0l4.793-4.793V2H3zm9 1a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v3.586l-3.793 3.793a1 1 0 0 1-1.414 0L5 6.586V3a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1h4V3z"/>
+                            </svg>
+                        </span>
+                        <h3 class="fs-5 fw-bold">Rent Specials</h3>
+                        <p>Discover move-in specials and other offers.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-light py-3">
+        <div class="container text-center">
+            <p class="mb-0">© 2024 Vethukko. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        window.onload = function() {
+            var username = localStorage.getItem('username');
+            var logoutButton = document.getElementById('logoutButton');
+            if (username) {
+                var loginLink = document.getElementById('loginLink');
+                loginLink.textContent = username;
+                loginLink.href = "#";
+                logoutButton.style.display = 'block';
+            } else {
+                logoutButton.style.display = 'none';
+            }
+        };
+        
+        function logout() {
+            localStorage.removeItem('username');
+            window.location.href = 'index.html';
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
